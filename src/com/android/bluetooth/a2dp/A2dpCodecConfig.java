@@ -15,6 +15,7 @@
  */
 
 package com.android.bluetooth.a2dp;
+import android.util.Log;
 
 import android.bluetooth.BluetoothCodecConfig;
 import android.bluetooth.BluetoothCodecConfig.CodecPriority;
@@ -51,6 +52,8 @@ class A2dpCodecConfig {
             BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
     private @CodecPriority int mA2dpSourceCodecPriorityLdac =
             BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
+    private @CodecPriority int mA2dpSourceCodecPriorityLhdc = 
+	        BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
 
     private BluetoothCodecConfig[] mCodecConfigOffloading = new BluetoothCodecConfig[0];
 
@@ -230,6 +233,17 @@ class A2dpCodecConfig {
                 < BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST)) {
             mA2dpSourceCodecPriorityLdac = value;
         }
+		
+        try {
+            value = resources.getInteger(R.integer.a2dp_source_codec_priority_lhdc);
+        } catch (NotFoundException e) {
+            value = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
+        }
+        if ((value >= BluetoothCodecConfig.CODEC_PRIORITY_DISABLED) && (value
+                < BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST)) {
+            mA2dpSourceCodecPriorityLhdc = value;
+        }
+
 
         return new BluetoothCodecConfig[] {
             new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC,
@@ -266,7 +280,14 @@ class A2dpCodecConfig {
                     BluetoothCodecConfig.BITS_PER_SAMPLE_NONE,
                     BluetoothCodecConfig.CHANNEL_MODE_NONE,
                     0 /* codecSpecific1 */, 0 /* codecSpecific2 */,
-                    0 /* codecSpecific3 */, 0 /* codecSpecific4 */),
+                    0 /* codecSpecific3 */, 0 /* codecSpecific4 */),					
+            new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDC,
+                    mA2dpSourceCodecPriorityLhdc,
+                    BluetoothCodecConfig.SAMPLE_RATE_NONE,
+                    BluetoothCodecConfig.BITS_PER_SAMPLE_NONE,
+                    BluetoothCodecConfig.CHANNEL_MODE_NONE,
+                    0 /* codecSpecific1 */, 0 /* codecSpecific2 */,
+                    0 /* codecSpecific3 */, 0 /* codecSpecific4 */),					
             new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC,
                     mA2dpSourceCodecPrioritySbc,
                     BluetoothCodecConfig.SAMPLE_RATE_NONE,

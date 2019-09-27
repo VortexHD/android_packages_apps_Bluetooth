@@ -56,6 +56,8 @@ class A2dpCodecConfig {
 	        BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
     private @CodecPriority int mA2dpSourceCodecPriorityLhdcV3 = 
 	        BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
+    private @CodecPriority int mA2dpSourceCodecPriorityLhdcV1 = 
+	        BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
 
     private BluetoothCodecConfig[] mCodecConfigOffloading = new BluetoothCodecConfig[0];
 
@@ -256,6 +258,16 @@ class A2dpCodecConfig {
             mA2dpSourceCodecPriorityLhdcV3 = value;
         }
 
+        try {
+            value = resources.getInteger(R.integer.a2dp_source_codec_priority_lhdcv1);
+        } catch (NotFoundException e) {
+            value = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
+        }
+        if ((value >= BluetoothCodecConfig.CODEC_PRIORITY_DISABLED) && (value
+                < BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST)) {
+            mA2dpSourceCodecPriorityLhdcV1 = value;
+        }
+
         return new BluetoothCodecConfig[] {
             new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC,
                     mA2dpSourceCodecPrioritySbc,
@@ -301,6 +313,13 @@ class A2dpCodecConfig {
                     0 /* codecSpecific3 */, 0 /* codecSpecific4 */),	
             new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV3,
                     mA2dpSourceCodecPriorityLhdcV3,
+                    BluetoothCodecConfig.SAMPLE_RATE_NONE,
+                    BluetoothCodecConfig.BITS_PER_SAMPLE_NONE,
+                    BluetoothCodecConfig.CHANNEL_MODE_NONE,
+                    0 /* codecSpecific1 */, 0 /* codecSpecific2 */,
+                    0 /* codecSpecific3 */, 0 /* codecSpecific4 */),	
+            new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV1,
+                    mA2dpSourceCodecPriorityLhdcV1,
                     BluetoothCodecConfig.SAMPLE_RATE_NONE,
                     BluetoothCodecConfig.BITS_PER_SAMPLE_NONE,
                     BluetoothCodecConfig.CHANNEL_MODE_NONE,

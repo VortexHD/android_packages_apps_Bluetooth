@@ -52,7 +52,9 @@ class A2dpCodecConfig {
             BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
     private @CodecPriority int mA2dpSourceCodecPriorityLdac =
             BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
-    private @CodecPriority int mA2dpSourceCodecPriorityLhdc = 
+    private @CodecPriority int mA2dpSourceCodecPriorityLhdcV3 = 
+	        BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
+    private @CodecPriority int mA2dpSourceCodecPriorityLhdcV2 = 
 	        BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
     private @CodecPriority int mA2dpSourceCodecPriorityLhdcV1 = 
 	        BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
@@ -237,15 +239,25 @@ class A2dpCodecConfig {
         }
 		
         try {
-            value = resources.getInteger(R.integer.a2dp_source_codec_priority_lhdc);
+            value = resources.getInteger(R.integer.a2dp_source_codec_priority_lhdcv3);
         } catch (NotFoundException e) {
             value = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
         }
         if ((value >= BluetoothCodecConfig.CODEC_PRIORITY_DISABLED) && (value
                 < BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST)) {
-            mA2dpSourceCodecPriorityLhdc = value;
+            mA2dpSourceCodecPriorityLhdcV3 = value;
         }
 
+        try {
+            value = resources.getInteger(R.integer.a2dp_source_codec_priority_lhdcv2);
+        } catch (NotFoundException e) {
+            value = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
+        }
+        if ((value >= BluetoothCodecConfig.CODEC_PRIORITY_DISABLED) && (value
+                < BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST)) {
+            mA2dpSourceCodecPriorityLhdcV2 = value;
+        }
+		
         try {
             value = resources.getInteger(R.integer.a2dp_source_codec_priority_lhdcv1);
         } catch (NotFoundException e) {
@@ -292,13 +304,20 @@ class A2dpCodecConfig {
                     BluetoothCodecConfig.CHANNEL_MODE_NONE,
                     0 /* codecSpecific1 */, 0 /* codecSpecific2 */,
                     0 /* codecSpecific3 */, 0 /* codecSpecific4 */),					
-            new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDC,
-                    mA2dpSourceCodecPriorityLhdc,
+            new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV3,
+                    mA2dpSourceCodecPriorityLhdcV3,
                     BluetoothCodecConfig.SAMPLE_RATE_NONE,
                     BluetoothCodecConfig.BITS_PER_SAMPLE_NONE,
                     BluetoothCodecConfig.CHANNEL_MODE_NONE,
                     0 /* codecSpecific1 */, 0 /* codecSpecific2 */,
-                    0 /* codecSpecific3 */, 0 /* codecSpecific4 */),		
+                    0 /* codecSpecific3 */, 0 /* codecSpecific4 */),
+            new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV2,
+                    mA2dpSourceCodecPriorityLhdcV2,
+                    BluetoothCodecConfig.SAMPLE_RATE_NONE,
+                    BluetoothCodecConfig.BITS_PER_SAMPLE_NONE,
+                    BluetoothCodecConfig.CHANNEL_MODE_NONE,
+                    0 /* codecSpecific1 */, 0 /* codecSpecific2 */,
+                    0 /* codecSpecific3 */, 0 /* codecSpecific4 */),					
             new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV1,
                     mA2dpSourceCodecPriorityLhdcV1,
                     BluetoothCodecConfig.SAMPLE_RATE_NONE,

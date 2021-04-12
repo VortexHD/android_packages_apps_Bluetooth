@@ -119,6 +119,38 @@ class A2dpCodecConfig {
         codecConfigArray[0] = newCodecConfig;
         mA2dpNativeInterface.setCodecConfigPreference(device, codecConfigArray);
     }
+    
+    //LHDC Extended Function API Start
+    int getLhdcCodecExtendAPIVer(BluetoothDevice device,
+                                byte[] exApiVer) {
+        return mA2dpNativeInterface.getLhdcCodecExtendAPIVer(device, exApiVer);
+    }
+        
+    int setLhdcCodecExtendAPIConfigAR(BluetoothDevice device,
+                                byte[] codecConfig) {
+        return mA2dpNativeInterface.setLhdcCodecExtendAPIConfigAR(device, codecConfig);
+    }
+    
+    int getLhdcCodecExtendAPIConfigAR(BluetoothDevice device,
+                                byte[] codecConfig) {
+        return mA2dpNativeInterface.getLhdcCodecExtendAPIConfigAR(device, codecConfig);
+    }    
+    
+    int setLhdcCodecExtendAPIConfigMQA(BluetoothDevice device,
+                                byte[] codecConfig) {
+        return mA2dpNativeInterface.setLhdcCodecExtendAPIConfigMQA(device, codecConfig);
+    }
+    
+    int getLhdcCodecExtendAPIConfigMQA(BluetoothDevice device,
+                                byte[] codecConfig) {
+        return mA2dpNativeInterface.getLhdcCodecExtendAPIConfigMQA(device, codecConfig);
+    }    
+    
+    void setLhdcCodecExtendAPIDataGyro2D(BluetoothDevice device,
+                                byte[] codecData) {
+        mA2dpNativeInterface.setLhdcCodecExtendAPIDataGyro2D(device, codecData);
+    }
+    //LHDC Extended Function API End
 
     void enableOptionalCodecs(BluetoothDevice device, BluetoothCodecConfig currentCodecConfig) {
         if (currentCodecConfig != null && !currentCodecConfig.isMandatoryCodec()) {

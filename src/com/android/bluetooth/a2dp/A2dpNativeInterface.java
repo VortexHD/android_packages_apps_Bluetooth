@@ -141,6 +141,44 @@ public class A2dpNativeInterface {
         return setCodecConfigPreferenceNative(getByteAddress(device),
                                               codecConfigArray);
     }
+    
+    //LHDC Extended Function API Start
+    public int getLhdcCodecExtendAPIVer(BluetoothDevice device,
+    									byte[] exApiVer) {
+	
+	    return getLhdcCodecExtendAPIVerNative(getByteAddress(device), exApiVer);
+	}
+
+    public int getLhdcCodecExtendAPIConfigAR(BluetoothDevice device,
+    									byte[] codecConfig) {
+	
+	    return getLhdcCodecExtendAPIConfigNative(getByteAddress(device), codecConfig);
+	}    
+    
+    public int setLhdcCodecExtendAPIConfigAR(BluetoothDevice device,
+    									byte[] codecConfig) {
+	
+	    return setLhdcCodecExtendAPIConfigNative(getByteAddress(device), codecConfig);
+	}
+	
+    public int getLhdcCodecExtendAPIConfigMQA(BluetoothDevice device,
+    									byte[] codecConfig) {
+	
+	    return getLhdcCodecExtendAPIConfigNative(getByteAddress(device), codecConfig);
+	}
+	
+    public int setLhdcCodecExtendAPIConfigMQA(BluetoothDevice device,
+    									byte[] codecConfig) {
+	
+	    return setLhdcCodecExtendAPIConfigNative(getByteAddress(device), codecConfig);
+	}
+	
+	public void setLhdcCodecExtendAPIDataGyro2D(BluetoothDevice device,
+    									byte[] codecData) {
+	
+	    setLhdcCodecExtendAPIDataNative(getByteAddress(device), codecData);
+	}
+	//LHDC Extended Function API End
 
     private BluetoothDevice getDevice(byte[] address) {
         return mAdapter.getRemoteDevice(address);
@@ -231,4 +269,16 @@ public class A2dpNativeInterface {
     private native boolean setActiveDeviceNative(byte[] address);
     private native boolean setCodecConfigPreferenceNative(byte[] address,
                 BluetoothCodecConfig[] codecConfigArray);
+    
+    private native int getLhdcCodecExtendAPIVerNative(byte[] address,
+    			byte[] exApiVer);
+
+    private native int setLhdcCodecExtendAPIConfigNative(byte[] address,
+    			byte[] codecConfig);
+    			
+    private native int getLhdcCodecExtendAPIConfigNative(byte[] address,
+    			byte[] codecConfig);
+
+    private native void setLhdcCodecExtendAPIDataNative(byte[] address,
+    			byte[] codecData);    			
 }

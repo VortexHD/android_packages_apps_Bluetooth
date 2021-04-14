@@ -138,6 +138,7 @@ public class A2dpNativeInterface {
      */
     public boolean setCodecConfigPreference(BluetoothDevice device,
                                             BluetoothCodecConfig[] codecConfigArray) {
+
         return setCodecConfigPreferenceNative(getByteAddress(device),
                                               codecConfigArray);
     }
@@ -161,13 +162,19 @@ public class A2dpNativeInterface {
 	    return setLhdcCodecExtendAPIConfigNative(getByteAddress(device), codecConfig);
 	}
 	
-    public int getLhdcCodecExtendAPIConfigMQA(BluetoothDevice device,
+    public int getLhdcCodecExtendAPIConfigMeta(BluetoothDevice device,
     									byte[] codecConfig) {
 	
 	    return getLhdcCodecExtendAPIConfigNative(getByteAddress(device), codecConfig);
 	}
 	
-    public int setLhdcCodecExtendAPIConfigMQA(BluetoothDevice device,
+    public int getLhdcCodecExtendAPIConfigA2dpCodecSpecific(BluetoothDevice device,
+    									byte[] codecConfig) {
+	
+	    return getLhdcCodecExtendAPIConfigNative(getByteAddress(device), codecConfig);
+	}
+	
+    public int setLhdcCodecExtendAPIConfigMeta(BluetoothDevice device,
     									byte[] codecConfig) {
 	
 	    return setLhdcCodecExtendAPIConfigNative(getByteAddress(device), codecConfig);
@@ -279,6 +286,9 @@ public class A2dpNativeInterface {
     private native int getLhdcCodecExtendAPIConfigNative(byte[] address,
     			byte[] codecConfig);
 
+    private native int getLhdcCodecExtendAPIA2dpCodecConfigNative(byte[] address,
+    			byte[] codecConfig);
+	
     private native void setLhdcCodecExtendAPIDataNative(byte[] address,
     			byte[] codecData);    			
 }

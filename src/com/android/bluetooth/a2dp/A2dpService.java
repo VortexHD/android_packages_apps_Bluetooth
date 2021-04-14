@@ -727,6 +727,7 @@ public class A2dpService extends ProfileService {
     public void setCodecConfigPreference(BluetoothDevice device,
                                          BluetoothCodecConfig codecConfig) {
         enforceCallingOrSelfPermission(BLUETOOTH_PERM, "Need BLUETOOTH permission");
+
         if (DBG) {
             Log.d(TAG, "setCodecConfigPreference(" + device + "): "
                     + Objects.toString(codecConfig));
@@ -781,24 +782,34 @@ public class A2dpService extends ProfileService {
         return mA2dpCodecConfig.getLhdcCodecExtendAPIConfigAR(device, codecConfig);
     }    
     
-    public int setLhdcCodecExtendAPIConfigMQA(BluetoothDevice device, 
+    public int setLhdcCodecExtendAPIConfigMeta(BluetoothDevice device, 
 									byte[] codecConfig) {
         if (device == null) {
             Log.e(TAG, "Cannot set codec config preference: no active A2DP device");
             return -1;
         }
 
-        return mA2dpCodecConfig.setLhdcCodecExtendAPIConfigMQA(device, codecConfig);
+        return mA2dpCodecConfig.setLhdcCodecExtendAPIConfigMeta(device, codecConfig);
     }
     
-    public int getLhdcCodecExtendAPIConfigMQA(BluetoothDevice device, 
+    public int getLhdcCodecExtendAPIConfigMeta(BluetoothDevice device, 
 									byte[] codecConfig) {
         if (device == null) {
             Log.e(TAG, "Cannot set codec config preference: no active A2DP device");
             return -1;
         }
 
-        return mA2dpCodecConfig.getLhdcCodecExtendAPIConfigMQA(device, codecConfig);
+        return mA2dpCodecConfig.getLhdcCodecExtendAPIConfigMeta(device, codecConfig);
+    }
+    
+    public int getLhdcCodecExtendAPIConfigA2dpCodecSpecific(BluetoothDevice device, 
+									byte[] codecConfig) {
+        if (device == null) {
+            Log.e(TAG, "Cannot set codec config preference: no active A2DP device");
+            return -1;
+        }
+
+        return mA2dpCodecConfig.getLhdcCodecExtendAPIConfigA2dpCodecSpecific(device, codecConfig);
     }
     
     public void setLhdcCodecExtendAPIDataGyro2D(BluetoothDevice device, 
@@ -1433,23 +1444,33 @@ public class A2dpService extends ProfileService {
         }        
         
 		@Override
-        public int setLhdcCodecExtendAPIConfigMQA(BluetoothDevice device, 
+        public int setLhdcCodecExtendAPIConfigMeta(BluetoothDevice device, 
         											byte[] codecConfig) {
             A2dpService service = getService();
             if (service == null) {
                 return -1;
             }
-            return service.setLhdcCodecExtendAPIConfigMQA(device, codecConfig);
+            return service.setLhdcCodecExtendAPIConfigMeta(device, codecConfig);
         }
         
 		@Override
-        public int getLhdcCodecExtendAPIConfigMQA(BluetoothDevice device, 
+        public int getLhdcCodecExtendAPIConfigMeta(BluetoothDevice device, 
         											byte[] codecConfig) {
             A2dpService service = getService();
             if (service == null) {
                 return -1;
             }
-            return service.getLhdcCodecExtendAPIConfigMQA(device, codecConfig);
+            return service.getLhdcCodecExtendAPIConfigMeta(device, codecConfig);
+        }
+        
+		@Override
+        public int getLhdcCodecExtendAPIConfigA2dpCodecSpecific(BluetoothDevice device, 
+        											byte[] codecConfig) {
+            A2dpService service = getService();
+            if (service == null) {
+                return -1;
+            }
+            return service.getLhdcCodecExtendAPIConfigA2dpCodecSpecific(device, codecConfig);
         }
         
 		@Override

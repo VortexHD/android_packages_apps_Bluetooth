@@ -87,7 +87,7 @@ class A2dpCodecConfig {
                                   BluetoothCodecStatus codecStatus,
                                   BluetoothCodecConfig newCodecConfig) {
         Objects.requireNonNull(codecStatus);
-
+        
         // Check whether the codecConfig is selectable for this Bluetooth device.
         BluetoothCodecConfig[] selectableCodecs = codecStatus.getCodecsSelectableCapabilities();
         if (!Arrays.asList(selectableCodecs).stream().anyMatch(codec ->
@@ -136,14 +136,19 @@ class A2dpCodecConfig {
         return mA2dpNativeInterface.getLhdcCodecExtendAPIConfigAR(device, codecConfig);
     }    
     
-    int setLhdcCodecExtendAPIConfigMQA(BluetoothDevice device,
+    int setLhdcCodecExtendAPIConfigMeta(BluetoothDevice device,
                                 byte[] codecConfig) {
-        return mA2dpNativeInterface.setLhdcCodecExtendAPIConfigMQA(device, codecConfig);
+        return mA2dpNativeInterface.setLhdcCodecExtendAPIConfigMeta(device, codecConfig);
     }
     
-    int getLhdcCodecExtendAPIConfigMQA(BluetoothDevice device,
+    int getLhdcCodecExtendAPIConfigMeta(BluetoothDevice device,
                                 byte[] codecConfig) {
-        return mA2dpNativeInterface.getLhdcCodecExtendAPIConfigMQA(device, codecConfig);
+        return mA2dpNativeInterface.getLhdcCodecExtendAPIConfigMeta(device, codecConfig);
+    }    
+    
+    int getLhdcCodecExtendAPIConfigA2dpCodecSpecific(BluetoothDevice device,
+                                byte[] codecConfig) {
+        return mA2dpNativeInterface.getLhdcCodecExtendAPIConfigA2dpCodecSpecific(device, codecConfig);
     }    
     
     void setLhdcCodecExtendAPIDataGyro2D(BluetoothDevice device,
@@ -367,3 +372,4 @@ class A2dpCodecConfig {
         };
     }
 }
+

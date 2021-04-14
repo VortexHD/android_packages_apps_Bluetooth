@@ -495,6 +495,7 @@ static jboolean setActiveDeviceNative(JNIEnv* env, jobject object,
 static jboolean setCodecConfigPreferenceNative(JNIEnv* env, jobject object,
                                                jbyteArray address,
                                                jobjectArray codecConfigArray) {
+
   ALOGI("%s: sBluetoothA2dpInterface: %p", __func__, sBluetoothA2dpInterface);
   std::shared_lock<std::shared_timed_mutex> lock(interface_mutex);
   if (!sBluetoothA2dpInterface) {
